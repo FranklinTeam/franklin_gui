@@ -99,17 +99,16 @@ void QNode::run() {
 	ros::Rate loop_rate(1);
 	int count = 0;
 	while ( ros::ok() ) {
-		/*
-		std_msgs::String msg;
-		std::stringstream ss;
-		ss << "hello world " << count;
-		msg.data = ss.str();
-		chatter_publisher.publish(msg);
-		log(Info,std::string("I sent: ")+msg.data);
-		*/
+
+                if(count == 0){
+                    //stop at start
+                    ROS_INFO("Stop at start");
+                    sendStop(true);
+                    ++count;
+                }
+
 		ros::spinOnce();
-		loop_rate.sleep();
-		++count;
+                loop_rate.sleep();
 	}
 	std::cout << "Ros shutdown, proceeding to close the gui." << std::endl;
 	Q_EMIT rosShutdown(); // used to signal the gui for a shutdown (useful to roslaunch)
@@ -153,6 +152,9 @@ void QNode::log( const LogLevel &level, const std::string &msg) {
 
 void QNode::sendTargetPos(double pX, double pY, double pT){
 	ROS_INFO("INFO POS SENT !");
+
+        sendStop(false);
+
 	geometry_msgs::Pose2D pose2D;
 	pose2D.x = pX;
 	pose2D.y = pY;
