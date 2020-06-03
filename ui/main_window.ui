@@ -214,22 +214,22 @@
        </property>
        <item>
         <property name="text">
-         <string>Turtlebot3_Leonardo</string>
+         <string>leonardo</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Turtlebot3_Raphael</string>
+         <string>raphael</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Turtlebot3_Donatello</string>
+         <string>donatello</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Turtlebot3_Michelangelo</string>
+         <string>michelangelo</string>
         </property>
        </item>
       </widget>
@@ -408,13 +408,6 @@
          <enum>QLCDNumber::Flat</enum>
         </property>
        </widget>
-       <zorder>label_9</zorder>
-       <zorder>label_10</zorder>
-       <zorder>label_11</zorder>
-       <zorder>lcdNumber_X</zorder>
-       <zorder>lcdNumber_Y</zorder>
-       <zorder>lcdNumber_T</zorder>
-       <zorder>lcdNumber</zorder>
       </widget>
      </widget>
     </item>

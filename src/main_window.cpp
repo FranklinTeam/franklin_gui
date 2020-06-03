@@ -55,10 +55,13 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 		//My connects
 		  QObject::connect(ui.pushButton_GO, SIGNAL(clicked()), this, SLOT(sendTargetPos()));
 			QObject::connect(ui.pushButton_STOP, SIGNAL(clicked()), this, SLOT(sendStop()));
+			QObject::connect(ui.checkBox, SIGNAL(stateChanged(int)), &qnode, SLOT(onAllChanged(int)));
 			QObject::connect(&qnode, SIGNAL(progressDataS()), this, SLOT(updateProgress()));
 			ui.progressBar_INFO->reset();
 			QObject::connect(&qnode, SIGNAL(odomS()), this, SLOT(updateOdom()));
 			qnode.init();
+
+			ui.listWidget->setCurrentItem(ui.listWidget->item(0));
 }
 
 MainWindow::~MainWindow() {}
@@ -177,7 +180,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 }
 
 void MainWindow::sendTargetPos(){
-	qnode.sendTargetPos(ui.doubleSpinBox_X->value(), ui.doubleSpinBox_Y->value(), ui.doubleSpinBox_T->value());
+        qnode.sendTargetPos(ui.doubleSpinBox_X->value(), ui.doubleSpinBox_Y->value(), ui.doubleSpinBox_T->value(), ui.listWidget->currentItem()->text().toStdString());
 }
 
 void MainWindow::updateProgress(){
@@ -191,7 +194,7 @@ void MainWindow::updateOdom(){
 }
 
 void MainWindow::sendStop(){
-	qnode.sendStop(true);
+  	qnode.sendStop(true, ui.listWidget->currentItem()->text().toStdString());
 }
 
 }  // namespace franklin_gui

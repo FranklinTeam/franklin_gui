@@ -46,12 +46,16 @@ public:
 	bool init();
 	bool init(const std::string &master_url, const std::string &host_url);
 	void run();
-  void sendTargetPos(double pX, double pY, double pT);
-  void sendStop(bool b);
+  void sendTargetPos(double pX, double pY, double pT, std::string pNamespace);
+  void sendOne(double pX, double pY, double pT, std::string pNamespace);
+  void sendStop(bool b, std::string pNamespace);
+  void stopOne(bool b, std::string pNamespace);
+  void sendStopAll(bool b);
   void info_dest_Callback(const std_msgs::Float32 msg);
   void odom_Callback(const nav_msgs::Odometry odom);
 	int progressData;
   float odom_X, odom_Y,odom_T;
+  bool all;
 
 	/*********************
 	** Logging
@@ -67,6 +71,9 @@ public:
 	QStringListModel* loggingModel() { return &logging_model; }
 	void log( const LogLevel &level, const std::string &msg);
 
+public Q_SLOTS:
+  void onAllChanged(int check);
+
 Q_SIGNALS:
 	void loggingUpdated();
   void rosShutdown();
@@ -79,10 +86,18 @@ private:
 	ros::Publisher chatter_publisher;
   QStringListModel logging_model;
 
-  ros::Publisher pub_dest;
-  ros::Publisher pub_stop;
   ros::Subscriber sub_info_dest;
   ros::Subscriber sub_odom;
+  ros::Publisher pub_cmd_1;
+  ros::Publisher pub_cmd_2;
+  ros::Publisher pub_cmd_3;
+  ros::Publisher pub_cmd_4;
+  ros::Publisher pub_stop_1;
+  ros::Publisher pub_stop_2;
+  ros::Publisher pub_stop_3;
+  ros::Publisher pub_stop_4;
+  ros::Publisher pub_dest;
+  ros::Publisher pub_stop;
 
 };
 
