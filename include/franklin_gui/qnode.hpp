@@ -52,10 +52,14 @@ public:
   void stopOne(bool b, std::string pNamespace);
   void sendStopAll(bool b);
   void info_dest_Callback(const std_msgs::Float32 msg);
-  void odom_Callback(const nav_msgs::Odometry odom);
+  void odom_Callback1(const nav_msgs::Odometry odom);
+  void odom_Callback2(const nav_msgs::Odometry odom);
+  void odom_Callback3(const nav_msgs::Odometry odom);
+  void odom_Callback4(const nav_msgs::Odometry odom);
 	int progressData;
   float odom_X, odom_Y,odom_T;
   bool all;
+  int row;
 
 	/*********************
 	** Logging
@@ -73,6 +77,7 @@ public:
 
 public Q_SLOTS:
   void onAllChanged(int check);
+  void onSelectionChanged(int currentRow);
 
 Q_SIGNALS:
 	void loggingUpdated();
@@ -87,7 +92,10 @@ private:
   QStringListModel logging_model;
 
   ros::Subscriber sub_info_dest;
-  ros::Subscriber sub_odom;
+  ros::Subscriber sub_odom_1;
+  ros::Subscriber sub_odom_2;
+  ros::Subscriber sub_odom_3;
+  ros::Subscriber sub_odom_4;
   ros::Publisher pub_cmd_1;
   ros::Publisher pub_cmd_2;
   ros::Publisher pub_cmd_3;

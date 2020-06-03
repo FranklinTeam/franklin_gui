@@ -56,6 +56,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 		  QObject::connect(ui.pushButton_GO, SIGNAL(clicked()), this, SLOT(sendTargetPos()));
 			QObject::connect(ui.pushButton_STOP, SIGNAL(clicked()), this, SLOT(sendStop()));
 			QObject::connect(ui.checkBox, SIGNAL(stateChanged(int)), &qnode, SLOT(onAllChanged(int)));
+			QObject::connect(ui.listWidget, SIGNAL(currentRowChanged(int)), &qnode, SLOT(onSelectionChanged(int)));
 			QObject::connect(&qnode, SIGNAL(progressDataS()), this, SLOT(updateProgress()));
 			ui.progressBar_INFO->reset();
 			QObject::connect(&qnode, SIGNAL(odomS()), this, SLOT(updateOdom()));

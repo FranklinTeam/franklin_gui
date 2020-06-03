@@ -75,8 +75,11 @@ bool QNode::init() {
 	pub_stop_3 = n.advertise<std_msgs::Bool>("donatello/destination/stop", 100);
 	pub_stop_4 = n.advertise<std_msgs::Bool>("michelangelo/destination/stop", 100);
 
-	sub_info_dest = n.subscribe("f_info_dest", 1, &QNode::info_dest_Callback, this);
-	sub_odom = n.subscribe("odom", 1, &QNode::odom_Callback, this);
+	sub_info_dest = n.subscribe("f_info_dest", 100, &QNode::info_dest_Callback, this);
+	sub_odom_1 = n.subscribe("leonardo/odom", 100, &QNode::odom_Callback1, this);
+	sub_odom_2 = n.subscribe("raphael/odom", 100, &QNode::odom_Callback2, this);
+	sub_odom_3 = n.subscribe("donatello/odom", 100, &QNode::odom_Callback3, this);
+	sub_odom_4 = n.subscribe("michelangelo/odom", 100, &QNode::odom_Callback4, this);
 
 	start();
 	return true;
@@ -104,17 +107,21 @@ bool QNode::init(const std::string &master_url, const std::string &host_url) {
 	pub_stop_3 = n.advertise<std_msgs::Bool>("donatello/destination/stop", 100);
 	pub_stop_4 = n.advertise<std_msgs::Bool>("michelangelo/destination/stop", 100);
 
-	sub_info_dest = n.subscribe("f_info_dest", 1, &QNode::info_dest_Callback, this); //&franklin_gui::QNode::info_dest_Callback, this
-	sub_odom = n.subscribe("odom", 1, &QNode::odom_Callback, this);
+	sub_info_dest = n.subscribe("f_info_dest", 100, &QNode::info_dest_Callback, this); //&franklin_gui::QNode::info_dest_Callback, this
+	sub_odom_1 = n.subscribe("leonardo/odom", 100, &QNode::odom_Callback1, this);
+	sub_odom_2 = n.subscribe("raphael/odom", 100, &QNode::odom_Callback2, this);
+	sub_odom_3 = n.subscribe("donatello/odom", 100, &QNode::odom_Callback3, this);
+	sub_odom_4 = n.subscribe("michelangelo/odom", 100, &QNode::odom_Callback4, this);
 
 	start();
 	return true;
 }
 
 void QNode::run() {
-	ros::Rate loop_rate(1);
+	ros::Rate loop_rate(100);
 	int count = 0;
 	this->all = true;
+	this->row = 0;
 	while ( ros::ok() ) {
 
                 if(count == 0){
@@ -206,34 +213,68 @@ void QNode::sendTargetPos(double pX, double pY, double pT, std::string pNamespac
 	}
 }
 
+void QNode::onSelectionChanged(int currentRow){
+	this->row = currentRow;
+}
+
 void QNode::info_dest_Callback(const std_msgs::Float32 msg){
 	ROS_INFO("PROGRESS UPDATE RECEIVE");
 	this->progressData = (int) (msg.data*100);
 	Q_EMIT progressDataS();
 }
 
-void QNode::odom_Callback(const nav_msgs::Odometry odom){
-	ROS_INFO("ODOM RECEIVE");
-	this->odom_X = odom.pose.pose.position.x;
-	this->odom_Y = odom.pose.pose.position.y;
-/*
-	// quaternion to RPY conversion
-	tf::Quaternion q(
-			odom.pose.pose.orientation.x,
-			odom.pose.pose.orientation.y,
-			odom.pose.pose.orientation.z,
-			odom.pose.pose.orientation.w);
-	tf::Matrix3x3 m(q);
-	double roll, pitch, yaw;
-	m.getRPY(roll, pitch, yaw);
-*/
-	// angular position
-	//this->odom_T = yaw;
-	this->odom_T = odom.pose.pose.orientation.z;
+void QNode::odom_Callback1(const nav_msgs::Odometry odom){
+		if(this->row == 0){
+			this->odom_X = odom.pose.pose.position.x;
+			this->odom_Y = odom.pose.pose.position.y;
+		/*
+			// quaternion to RPY conversion
+			tf::Quaternion q(
+					odom.pose.pose.orientation.x,
+					odom.pose.pose.orientation.y,
+					odom.pose.pose.orientation.z,
+					odom.pose.pose.orientation.w);
+			tf::Matrix3x3 m(q);
+			double roll, pitch, yaw;
+			m.getRPY(roll, pitch, yaw);
+		*/
+			// angular position
+			//this->odom_T = yaw;
+			this->odom_T = odom.pose.pose.orientation.z;
 
-	ROS_INFO("X = %lf", this->odom_X);
 
-	Q_EMIT odomS();
+			Q_EMIT odomS();
+	}
+}
+
+void QNode::odom_Callback2(const nav_msgs::Odometry odom){
+	if(this->row == 1){
+		this->odom_X = odom.pose.pose.position.x;
+		this->odom_Y = odom.pose.pose.position.y;
+		this->odom_T = odom.pose.pose.orientation.z;
+
+		Q_EMIT odomS();
+ }
+}
+
+void QNode::odom_Callback3(const nav_msgs::Odometry odom){
+	if(this->row == 2){
+		this->odom_X = odom.pose.pose.position.x;
+		this->odom_Y = odom.pose.pose.position.y;
+		this->odom_T = odom.pose.pose.orientation.z;
+
+		Q_EMIT odomS();
+ }
+}
+
+void QNode::odom_Callback4(const nav_msgs::Odometry odom){
+	if(this->row == 3){
+		this->odom_X = odom.pose.pose.position.x;
+		this->odom_Y = odom.pose.pose.position.y;
+		this->odom_T = odom.pose.pose.orientation.z;
+
+		Q_EMIT odomS();
+ }
 }
 
 void QNode::stopOne(bool b, std::string pNamespace){
