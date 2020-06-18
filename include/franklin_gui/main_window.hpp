@@ -55,9 +55,11 @@ public Q_SLOTS:
     *******************************************/
     void updateLoggingView(); // no idea why this can't connect automatically
 		void sendTargetPos();
-		void updateProgress();
+		void sendCMDset();
+		void sendCMDget();
 		void updateOdom();
 		void sendStop();
+		void updateState();
 
 private:
 	Ui::MainWindowDesign ui;

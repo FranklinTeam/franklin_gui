@@ -11,6 +11,8 @@
 *****************************************************************************/
 
 #include <ros/ros.h>
+#include <move_base_msgs/MoveBaseAction.h>
+#include <actionlib/client/simple_action_client.h>
 #include <tf/tf.h>
 #include <ros/network.h>
 #include <string>
@@ -26,6 +28,10 @@
 #include <iostream>
 #include <algorithm>
 #include "../include/franklin_gui/qnode.hpp"
+#include <franklin/CmdRobot.h>
+#include <franklin/PackageRobot.h>
+
+typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
 /*****************************************************************************
 ** Namespaces
@@ -64,22 +70,27 @@ bool QNode::init() {
 	ros::start(); // explicitly needed since our nodehandle is going out of scope.
 	ros::NodeHandle n;
 	// Add your ros communications here.
-	chatter_publisher = n.advertise<std_msgs::String>("chatter", 1000);
+	pub_cmd_1 = n.advertise<franklin::CmdRobot>("/COM_ctrl_to_tb1", 100);
+	pub_cmd_2 = n.advertise<franklin::CmdRobot>("/COM_ctrl_to_tb2", 100);
+	pub_cmd_3 = n.advertise<franklin::CmdRobot>("/COM_ctrl_to_tb3", 100);
+	pub_cmd_4 = n.advertise<franklin::CmdRobot>("/COM_ctrl_to_tb4", 100);
 
-	pub_cmd_1 = n.advertise<geometry_msgs::Pose2D>("leonardo/destination", 100);
-	pub_cmd_2 = n.advertise<geometry_msgs::Pose2D>("raphael/destination", 100);
-	pub_cmd_3 = n.advertise<geometry_msgs::Pose2D>("donatello/destination", 100);
-	pub_cmd_4 = n.advertise<geometry_msgs::Pose2D>("michelangelo/destination", 100);
-	pub_stop_1 = n.advertise<std_msgs::Bool>("leonardo/destination/stop", 100);
-	pub_stop_2 = n.advertise<std_msgs::Bool>("raphael/destination/stop", 100);
-	pub_stop_3 = n.advertise<std_msgs::Bool>("donatello/destination/stop", 100);
-	pub_stop_4 = n.advertise<std_msgs::Bool>("michelangelo/destination/stop", 100);
+	sub_state_1 = n.subscribe("/COM_tb1_to_ctrl", 100, &QNode::state_Callback1, this);
+	sub_state_2 = n.subscribe("/COM_tb2_to_ctrl", 100, &QNode::state_Callback2, this);
+	sub_state_3 = n.subscribe("/COM_tb3_to_ctrl", 100, &QNode::state_Callback3, this);
+	sub_state_4 = n.subscribe("/COM_tb4_to_ctrl", 100, &QNode::state_Callback4, this);
 
-	sub_info_dest = n.subscribe("f_info_dest", 100, &QNode::info_dest_Callback, this);
-	sub_odom_1 = n.subscribe("leonardo/odom", 100, &QNode::odom_Callback1, this);
-	sub_odom_2 = n.subscribe("raphael/odom", 100, &QNode::odom_Callback2, this);
-	sub_odom_3 = n.subscribe("donatello/odom", 100, &QNode::odom_Callback3, this);
-	sub_odom_4 = n.subscribe("michelangelo/odom", 100, &QNode::odom_Callback4, this);
+	sub_odom_1 = n.subscribe("tb1/odom", 100, &QNode::odom_Callback1, this);
+	sub_odom_2 = n.subscribe("tb2/odom", 100, &QNode::odom_Callback2, this);
+	sub_odom_3 = n.subscribe("tb3/odom", 100, &QNode::odom_Callback3, this);
+	sub_odom_4 = n.subscribe("tb4/odom", 100, &QNode::odom_Callback4, this);
+
+	//tell the action client that we want to spin a thread by default
+  //MoveBaseClient ac("/" + robot_name + "/move_base", true);
+
+  //wait for the action server to come up
+  //while(!ac.waitForServer(ros::Duration(5.0))){
+    //ROS_INFO("Waiting for the move_base action server to come up");
 
 	start();
 	return true;
@@ -96,22 +107,20 @@ bool QNode::init(const std::string &master_url, const std::string &host_url) {
 	ros::start(); // explicitly needed since our nodehandle is going out of scope.
 	ros::NodeHandle n;
 	// Add your ros communications here.
-	chatter_publisher = n.advertise<std_msgs::String>("chatter", 1000);
+	pub_cmd_1 = n.advertise<franklin::CmdRobot>("/COM_ctrl_to_tb1", 100);
+	pub_cmd_2 = n.advertise<franklin::CmdRobot>("/COM_ctrl_to_tb2", 100);
+	pub_cmd_3 = n.advertise<franklin::CmdRobot>("/COM_ctrl_to_tb3", 100);
+	pub_cmd_4 = n.advertise<franklin::CmdRobot>("/COM_ctrl_to_tb4", 100);
 
-	pub_cmd_1 = n.advertise<geometry_msgs::Pose2D>("leonardo/destination", 100);
-	pub_cmd_2 = n.advertise<geometry_msgs::Pose2D>("raphael/destination", 100);
-	pub_cmd_3 = n.advertise<geometry_msgs::Pose2D>("donatello/destination", 100);
-	pub_cmd_4 = n.advertise<geometry_msgs::Pose2D>("michelangelo/destination", 100);
-	pub_stop_1 = n.advertise<std_msgs::Bool>("leonardo/destination/stop", 100);
-	pub_stop_2 = n.advertise<std_msgs::Bool>("raphael/destination/stop", 100);
-	pub_stop_3 = n.advertise<std_msgs::Bool>("donatello/destination/stop", 100);
-	pub_stop_4 = n.advertise<std_msgs::Bool>("michelangelo/destination/stop", 100);
+	sub_state_1 = n.subscribe("/COM_tb1_to_ctrl", 100, &QNode::state_Callback1, this);
+	sub_state_2 = n.subscribe("/COM_tb2_to_ctrl", 100, &QNode::state_Callback2, this);
+	sub_state_3 = n.subscribe("/COM_tb3_to_ctrl", 100, &QNode::state_Callback3, this);
+	sub_state_4 = n.subscribe("/COM_tb4_to_ctrl", 100, &QNode::state_Callback4, this);
 
-	sub_info_dest = n.subscribe("f_info_dest", 100, &QNode::info_dest_Callback, this); //&franklin_gui::QNode::info_dest_Callback, this
-	sub_odom_1 = n.subscribe("leonardo/odom", 100, &QNode::odom_Callback1, this);
-	sub_odom_2 = n.subscribe("raphael/odom", 100, &QNode::odom_Callback2, this);
-	sub_odom_3 = n.subscribe("donatello/odom", 100, &QNode::odom_Callback3, this);
-	sub_odom_4 = n.subscribe("michelangelo/odom", 100, &QNode::odom_Callback4, this);
+	sub_odom_1 = n.subscribe("tb1/odom", 100, &QNode::odom_Callback1, this);
+	sub_odom_2 = n.subscribe("tb2/odom", 100, &QNode::odom_Callback2, this);
+	sub_odom_3 = n.subscribe("tb3/odom", 100, &QNode::odom_Callback3, this);
+	sub_odom_4 = n.subscribe("tb4/odom", 100, &QNode::odom_Callback4, this);
 
 	start();
 	return true;
@@ -124,15 +133,7 @@ void QNode::run() {
 	this->row = 0;
 	while ( ros::ok() ) {
 
-                if(count == 0){
-                    //stop at start
-                    ROS_INFO("Stop at start");
-										sendStop(true, "leonardo");
-										sendStop(true, "raphael");
-										sendStop(true, "donatello");
-										sendStop(true, "michelangelo");
-                }
-								++count;
+
 		ros::spinOnce();
                 loop_rate.sleep();
 	}
@@ -177,26 +178,8 @@ void QNode::log( const LogLevel &level, const std::string &msg) {
 }
 
 void QNode::sendOne(double pX, double pY, double pT, std::string pNamespace){
-	if(pNamespace.compare("leonardo") == 0){
-		pub_dest = pub_cmd_1;
-	}else if(pNamespace.compare("raphael") == 0){
-		pub_dest = pub_cmd_2;
-	}else if(pNamespace.compare("donatello") == 0){
-		pub_dest = pub_cmd_3;
-	}else if(pNamespace.compare("michelangelo") == 0){
-		pub_dest = pub_cmd_4;
-	}
 
-	if(pub_dest != NULL){
 
-  	sendStop(false, pNamespace);
-
-		geometry_msgs::Pose2D pose2D;
-		pose2D.x = pX;
-		pose2D.y = pY;
-		pose2D.theta = pT;
-		pub_dest.publish(pose2D);
-  }
 
 }
 
@@ -215,12 +198,6 @@ void QNode::sendTargetPos(double pX, double pY, double pT, std::string pNamespac
 
 void QNode::onSelectionChanged(int currentRow){
 	this->row = currentRow;
-}
-
-void QNode::info_dest_Callback(const std_msgs::Float32 msg){
-	ROS_INFO("PROGRESS UPDATE RECEIVE");
-	this->progressData = (int) (msg.data*100);
-	Q_EMIT progressDataS();
 }
 
 void QNode::odom_Callback1(const nav_msgs::Odometry odom){
@@ -277,21 +254,59 @@ void QNode::odom_Callback4(const nav_msgs::Odometry odom){
  }
 }
 
+void QNode::state_Callback1(const franklin::PackageRobot msg){
+	this->state1 = msg.state;
+	this->pack1 = msg.package;
+	Q_EMIT stateChanged();
+}
+void QNode::state_Callback2(const franklin::PackageRobot msg){
+	this->state2 = msg.state;
+	this->pack2 = msg.package;
+	Q_EMIT stateChanged();
+}
+void QNode::state_Callback3(const franklin::PackageRobot msg){
+	this->state3 = msg.state;
+	this->pack3 = msg.package;
+	Q_EMIT stateChanged();
+}
+void QNode::state_Callback4(const franklin::PackageRobot msg){
+	this->state4 = msg.state;
+	this->pack4 = msg.package;
+	Q_EMIT stateChanged();
+}
+
+void QNode::sendCMD(std::string name, std::string target, double x, double y, bool toOther, bool receive){
+	ROS_INFO("INFO CMD SENT !");
+	franklin::CmdRobot msg;
+	msg.reception = receive;
+	msg.from_robot = toOther;
+	msg.robot_name = target;
+	msg.obj_x = x;
+	msg.obj_y = y;
+
+	if(name.compare("tb1") == 0){
+		pub_cmd_1.publish(msg);
+	}else if(name.compare("tb2") == 0){
+		pub_cmd_2.publish(msg);
+	}else if(name.compare("tb3") == 0){
+		pub_cmd_3.publish(msg);
+	}else if(name.compare("tb4") == 0){
+		pub_cmd_4.publish(msg);
+	}
+
+}
+
 void QNode::stopOne(bool b, std::string pNamespace){
 	if(pNamespace.compare("leonardo") == 0){
-		pub_stop = pub_stop_1;
+
 	}else if(pNamespace.compare("raphael") == 0){
-		pub_stop = pub_stop_2;
+
 	}else if(pNamespace.compare("donatello") == 0){
-		pub_stop = pub_stop_3;
+
 	}else if(pNamespace.compare("michelangelo") == 0){
-		pub_stop = pub_stop_4;
+
 	}
-	if(pub_stop != NULL){
-		std_msgs::Bool msg;
-		msg.data = b;
-		pub_stop.publish(msg);
-	}
+
 }
 
 void QNode::sendStop(bool b, std::string pNamespace){

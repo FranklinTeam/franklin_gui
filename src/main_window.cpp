@@ -55,11 +55,12 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 		//My connects
 		  QObject::connect(ui.pushButton_GO, SIGNAL(clicked()), this, SLOT(sendTargetPos()));
 			QObject::connect(ui.pushButton_STOP, SIGNAL(clicked()), this, SLOT(sendStop()));
+			QObject::connect(ui.pushButton_set, SIGNAL(clicked()), this, SLOT(sendCMDset()));
+			QObject::connect(ui.pushButton_get, SIGNAL(clicked()), this, SLOT(sendCMDget()));
 			QObject::connect(ui.checkBox, SIGNAL(stateChanged(int)), &qnode, SLOT(onAllChanged(int)));
 			QObject::connect(ui.listWidget, SIGNAL(currentRowChanged(int)), &qnode, SLOT(onSelectionChanged(int)));
-			QObject::connect(&qnode, SIGNAL(progressDataS()), this, SLOT(updateProgress()));
-			ui.progressBar_INFO->reset();
 			QObject::connect(&qnode, SIGNAL(odomS()), this, SLOT(updateOdom()));
+			QObject::connect(&qnode, SIGNAL(stateChanged()), this, SLOT(updateState()));
 			qnode.init();
 
 			ui.listWidget->setCurrentItem(ui.listWidget->item(0));
@@ -184,14 +185,31 @@ void MainWindow::sendTargetPos(){
         qnode.sendTargetPos(ui.doubleSpinBox_X->value(), ui.doubleSpinBox_Y->value(), ui.doubleSpinBox_T->value(), ui.listWidget->currentItem()->text().toStdString());
 }
 
-void MainWindow::updateProgress(){
-	ui.progressBar_INFO->setValue(qnode.progressData);
+void MainWindow::sendCMDset(){
+	qnode.sendCMD(ui.listWidget_robot->currentItem()->text().toStdString(), ui.listWidget_target->currentItem()->text().toStdString(),
+				ui.doubleSpinBox_X_2->value(), ui.doubleSpinBox_Y_2->value(), ui.checkBox_toO->isChecked(), FALSE);
+}
+
+void MainWindow::sendCMDget(){
+	qnode.sendCMD(ui.listWidget_robot->currentItem()->text().toStdString(), ui.listWidget_target->currentItem()->text().toStdString(),
+				ui.doubleSpinBox_X_2->value(), ui.doubleSpinBox_Y_2->value(), ui.checkBox_toO->isChecked(), TRUE);
 }
 
 void MainWindow::updateOdom(){
 	ui.lcdNumber_X->display(qnode.odom_X);
 	ui.lcdNumber_Y->display(qnode.odom_Y);
 	ui.lcdNumber_T->display(qnode.odom_T);
+}
+
+void MainWindow::updateState(){
+	ui.display1->setText(QString::fromUtf8(qnode.state1.c_str()));
+  ui.display2->setText(QString::fromUtf8(qnode.state2.c_str()));
+	ui.display3->setText(QString::fromUtf8(qnode.state3.c_str()));
+	ui.display4->setText(QString::fromUtf8(qnode.state4.c_str()));
+	ui.radio1->setChecked(qnode.pack1);
+	ui.radio2->setChecked(qnode.pack2);
+	ui.radio3->setChecked(qnode.pack3);
+	ui.radio4->setChecked(qnode.pack4);
 }
 
 void MainWindow::sendStop(){

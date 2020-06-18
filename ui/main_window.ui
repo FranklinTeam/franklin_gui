@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>955</width>
-    <height>494</height>
+    <width>953</width>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,390 +23,798 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout">
     <item>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="title">
-       <string>Destination Panel</string>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
       </property>
-      <widget class="QProgressBar" name="progressBar_INFO">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>340</y>
-         <width>503</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-      </widget>
-      <widget class="QGroupBox" name="groupBox_3">
-       <property name="geometry">
-        <rect>
-         <x>300</x>
-         <y>40</y>
-         <width>281</width>
-         <height>131</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Target Position &amp; Orientation :</string>
-       </property>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_X">
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Network Manager With Debug</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_5">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>60</y>
-          <width>69</width>
-          <height>27</height>
+          <x>20</x>
+          <y>20</y>
+          <width>431</width>
+          <height>131</height>
          </rect>
         </property>
-        <property name="minimum">
-         <double>-4.000000000000000</double>
+        <property name="title">
+         <string>Add/Remove Item</string>
         </property>
-        <property name="maximum">
-         <double>4.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.250000000000000</double>
-        </property>
+        <widget class="QListWidget" name="listWidget_robot">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>71</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>tb1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb4</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QPushButton" name="pushButton_set">
+         <property name="geometry">
+          <rect>
+           <x>110</x>
+           <y>80</y>
+           <width>91</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Send</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_22">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>20</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Y :</string>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBox_X_2">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>50</y>
+           <width>69</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="minimum">
+          <double>-4.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>4.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.250000000000000</double>
+         </property>
+        </widget>
+        <widget class="QDoubleSpinBox" name="doubleSpinBox_Y_2">
+         <property name="geometry">
+          <rect>
+           <x>180</x>
+           <y>50</y>
+           <width>69</width>
+           <height>27</height>
+          </rect>
+         </property>
+         <property name="minimum">
+          <double>-4.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>4.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.250000000000000</double>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_20">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>20</y>
+           <width>67</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>X :</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_get">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>80</y>
+           <width>91</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Get</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBox_toO">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>50</y>
+           <width>71</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>robot</string>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="listWidget_target">
+         <property name="geometry">
+          <rect>
+           <x>340</x>
+           <y>30</y>
+           <width>71</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>tb1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb4</string>
+          </property>
+         </item>
+        </widget>
        </widget>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_Y">
+       <widget class="QGroupBox" name="groupBox_6">
         <property name="geometry">
          <rect>
-          <x>90</x>
-          <y>60</y>
-          <width>69</width>
-          <height>27</height>
+          <x>20</x>
+          <y>170</y>
+          <width>301</width>
+          <height>211</height>
          </rect>
         </property>
-        <property name="minimum">
-         <double>-4.000000000000000</double>
+        <property name="title">
+         <string>States</string>
         </property>
-        <property name="maximum">
-         <double>4.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.250000000000000</double>
-        </property>
+        <widget class="QLabel" name="display1">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>30</y>
+           <width>121</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text">
+          <string>state not found</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_12">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>51</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>tb1 :</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_13">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>60</y>
+           <width>51</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>tb2 :</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="display2">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>60</y>
+           <width>121</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text">
+          <string>state not found</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_15">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>90</y>
+           <width>51</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>tb3 :</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="display3">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>90</y>
+           <width>121</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text">
+          <string>state not found</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_17">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>120</y>
+           <width>51</width>
+           <height>17</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>tb4 :</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="display4">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>120</y>
+           <width>121</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text">
+          <string>state not found</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radio1">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>30</y>
+           <width>91</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radio2">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>60</y>
+           <width>81</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radio3">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>90</y>
+           <width>81</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radio4">
+         <property name="geometry">
+          <rect>
+           <x>220</x>
+           <y>120</y>
+           <width>81</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
+         </property>
+        </widget>
        </widget>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_T">
+       <widget class="QLabel" name="label_19">
         <property name="geometry">
          <rect>
-          <x>170</x>
-          <y>60</y>
-          <width>69</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="minimum">
-         <double>-180.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>180.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>45.000000000000000</double>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_4">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>67</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>X :</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_5">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>30</y>
-          <width>67</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Y :</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_6">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>30</y>
-          <width>67</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>T : </string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_GO">
-        <property name="geometry">
-         <rect>
-          <x>180</x>
-          <y>100</y>
-          <width>99</width>
-          <height>27</height>
+          <x>400</x>
+          <y>330</y>
+          <width>191</width>
+          <height>20</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
-          <bold>true</bold>
+          <italic>true</italic>
          </font>
         </property>
         <property name="text">
-         <string>Go !</string>
+         <string>Copyright ©. Franklin Team</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_STOP">
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Individual Debug </string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_2">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>100</y>
-          <width>141</width>
-          <height>27</height>
+          <y>10</y>
+          <width>611</width>
+          <height>568</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
+        <property name="title">
+         <string>Destination Panel</string>
         </property>
-        <property name="text">
-         <string>Emergency Stop</string>
-        </property>
-        <property name="default">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QLabel" name="label_7">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>300</y>
-         <width>111</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Progress :</string>
-       </property>
-      </widget>
-      <widget class="QListWidget" name="listWidget">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>50</y>
-         <width>211</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <item>
-        <property name="text">
-         <string>leonardo</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>raphael</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>donatello</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>michelangelo</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QCheckBox" name="checkBox">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>150</y>
-         <width>51</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>All</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_8">
-       <property name="geometry">
-        <rect>
-         <x>410</x>
-         <y>390</y>
-         <width>191</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <italic>true</italic>
-        </font>
-       </property>
-       <property name="text">
-        <string>Copyright ©. Franklin Team</string>
-       </property>
-      </widget>
-      <widget class="QGroupBox" name="groupBox_4">
-       <property name="geometry">
-        <rect>
-         <x>300</x>
-         <y>190</y>
-         <width>281</width>
-         <height>101</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Actual Position &amp; Orientation :</string>
-       </property>
-       <widget class="QLabel" name="label_9">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>67</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>X :</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_10">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>30</y>
-          <width>67</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Y :</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_11">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>30</y>
-          <width>67</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>T : </string>
-        </property>
-       </widget>
-       <widget class="QLCDNumber" name="lcdNumber_X">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>60</y>
-          <width>64</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Panel</enum>
-        </property>
-        <property name="lineWidth">
-         <number>1</number>
-        </property>
-        <property name="midLineWidth">
-         <number>0</number>
-        </property>
-        <property name="smallDecimalPoint">
-         <bool>false</bool>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Flat</enum>
-        </property>
-        <property name="value" stdset="0">
-         <double>0.000000000000000</double>
-        </property>
-       </widget>
-       <widget class="QLCDNumber" name="lcdNumber_Y">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>60</y>
-          <width>64</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Panel</enum>
-        </property>
-        <property name="lineWidth">
-         <number>1</number>
-        </property>
-        <property name="midLineWidth">
-         <number>0</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Flat</enum>
-        </property>
-       </widget>
-       <widget class="QLCDNumber" name="lcdNumber_T">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>60</y>
-          <width>64</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Panel</enum>
-        </property>
-        <property name="lineWidth">
-         <number>1</number>
-        </property>
-        <property name="midLineWidth">
-         <number>0</number>
-        </property>
-        <property name="segmentStyle">
-         <enum>QLCDNumber::Flat</enum>
-        </property>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="geometry">
+          <rect>
+           <x>300</x>
+           <y>40</y>
+           <width>281</width>
+           <height>131</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Target Position &amp; Orientation :</string>
+         </property>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_X">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>69</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <double>-4.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>4.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.250000000000000</double>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_Y">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>60</y>
+            <width>69</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <double>-4.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>4.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.250000000000000</double>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_T">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>60</y>
+            <width>69</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <double>-180.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>180.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>45.000000000000000</double>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>X :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>30</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Y :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_6">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>30</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>T : </string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_GO">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>100</y>
+            <width>99</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Go !</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_STOP">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>100</y>
+            <width>141</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Emergency Stop</string>
+          </property>
+          <property name="default">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QListWidget" name="listWidget">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>50</y>
+           <width>211</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>tb1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tb4</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QCheckBox" name="checkBox">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>150</y>
+           <width>51</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>All</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_8">
+         <property name="geometry">
+          <rect>
+           <x>410</x>
+           <y>390</y>
+           <width>191</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="text">
+          <string>Copyright ©. Franklin Team</string>
+         </property>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="geometry">
+          <rect>
+           <x>300</x>
+           <y>190</y>
+           <width>281</width>
+           <height>101</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Actual Position &amp; Orientation :</string>
+         </property>
+         <widget class="QLabel" name="label_9">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>30</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>X :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_10">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>30</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Y :</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_11">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>30</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>T : </string>
+          </property>
+         </widget>
+         <widget class="QLCDNumber" name="lcdNumber_X">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>64</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="lineWidth">
+           <number>1</number>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <property name="smallDecimalPoint">
+           <bool>false</bool>
+          </property>
+          <property name="segmentStyle">
+           <enum>QLCDNumber::Flat</enum>
+          </property>
+          <property name="value" stdset="0">
+           <double>0.000000000000000</double>
+          </property>
+         </widget>
+         <widget class="QLCDNumber" name="lcdNumber_Y">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>60</y>
+            <width>64</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="lineWidth">
+           <number>1</number>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <property name="segmentStyle">
+           <enum>QLCDNumber::Flat</enum>
+          </property>
+         </widget>
+         <widget class="QLCDNumber" name="lcdNumber_T">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>60</y>
+            <width>64</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="lineWidth">
+           <number>1</number>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <property name="segmentStyle">
+           <enum>QLCDNumber::Flat</enum>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </widget>
      </widget>
@@ -418,7 +826,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>955</width>
+     <width>953</width>
      <height>25</height>
     </rect>
    </property>
