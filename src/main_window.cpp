@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <QLCDNumber>
 #include <iostream>
+#include <string>
 #include "../include/franklin_gui/main_window.hpp"
 
 /*****************************************************************************
@@ -201,15 +202,38 @@ void MainWindow::updateOdom(){
 	ui.lcdNumber_T->display(qnode.odom_T);
 }
 
+//to_string fix
+std::string MainWindow::myto_string(int i){
+  std::stringstream ss;
+  ss << i;
+  return ss.str();
+}
+
 void MainWindow::updateState(){
 	ui.display1->setText(QString::fromUtf8(qnode.state1.c_str()));
   ui.display2->setText(QString::fromUtf8(qnode.state2.c_str()));
 	ui.display3->setText(QString::fromUtf8(qnode.state3.c_str()));
 	ui.display4->setText(QString::fromUtf8(qnode.state4.c_str()));
-	ui.radio1->setChecked(qnode.pack1);
-	ui.radio2->setChecked(qnode.pack2);
-	ui.radio3->setChecked(qnode.pack3);
-	ui.radio4->setChecked(qnode.pack4);
+	if(qnode.pack1){
+		ui.display1ID->setText(QString::fromUtf8("Package : ") + QString::number(qnode.pack1ID));
+	}else{
+		ui.display1ID->setText(QString::fromUtf8("Nothing"));
+	}
+	if(qnode.pack2){
+		ui.display2ID->setText(QString::fromUtf8("Package : ") + QString::number(qnode.pack2ID));
+	}else{
+		ui.display2ID->setText(QString::fromUtf8("Nothing"));
+	}
+	if(qnode.pack3){
+		ui.display3ID->setText(QString::fromUtf8("Package : ") + QString::number(qnode.pack3ID));
+	}else{
+		ui.display3ID->setText(QString::fromUtf8("Nothing"));
+	}
+	if(qnode.pack4){
+		ui.display4ID->setText(QString::fromUtf8("Package : ") + QString::number(qnode.pack4ID));
+	}else{
+		ui.display4ID->setText(QString::fromUtf8("Nothing"));
+	}
 }
 
 void MainWindow::sendStop(){

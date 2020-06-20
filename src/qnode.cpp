@@ -257,21 +257,25 @@ void QNode::odom_Callback4(const nav_msgs::Odometry odom){
 void QNode::state_Callback1(const franklin::PackageRobot msg){
 	this->state1 = msg.state;
 	this->pack1 = msg.package;
+	this->pack1ID = msg.id;
 	Q_EMIT stateChanged();
 }
 void QNode::state_Callback2(const franklin::PackageRobot msg){
 	this->state2 = msg.state;
 	this->pack2 = msg.package;
+	this->pack2ID = msg.id;
 	Q_EMIT stateChanged();
 }
 void QNode::state_Callback3(const franklin::PackageRobot msg){
 	this->state3 = msg.state;
 	this->pack3 = msg.package;
+	this->pack3ID = msg.id;
 	Q_EMIT stateChanged();
 }
 void QNode::state_Callback4(const franklin::PackageRobot msg){
 	this->state4 = msg.state;
 	this->pack4 = msg.package;
+	this->pack4ID = msg.id;
 	Q_EMIT stateChanged();
 }
 

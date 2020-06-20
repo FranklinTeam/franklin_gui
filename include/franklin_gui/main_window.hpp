@@ -16,6 +16,7 @@
 #include <QLCDNumber>
 #include "ui_main_window.h"
 #include "qnode.hpp"
+#include <string>
 
 /*****************************************************************************
 ** Namespace
@@ -60,6 +61,7 @@ public Q_SLOTS:
 		void updateOdom();
 		void sendStop();
 		void updateState();
+		std::string myto_string(int i);
 
 private:
 	Ui::MainWindowDesign ui;

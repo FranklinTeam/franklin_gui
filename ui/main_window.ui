@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>953</width>
-    <height>461</height>
+    <width>952</width>
+    <height>444</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -212,7 +212,7 @@
          <rect>
           <x>20</x>
           <y>170</y>
-          <width>301</width>
+          <width>391</width>
           <height>211</height>
          </rect>
         </property>
@@ -224,7 +224,7 @@
           <rect>
            <x>80</x>
            <y>30</y>
-           <width>121</width>
+           <width>141</width>
            <height>19</height>
           </rect>
          </property>
@@ -269,7 +269,7 @@
           <rect>
            <x>80</x>
            <y>60</y>
-           <width>121</width>
+           <width>141</width>
            <height>19</height>
           </rect>
          </property>
@@ -301,7 +301,7 @@
           <rect>
            <x>80</x>
            <y>90</y>
-           <width>121</width>
+           <width>141</width>
            <height>19</height>
           </rect>
          </property>
@@ -333,7 +333,7 @@
           <rect>
            <x>80</x>
            <y>120</y>
-           <width>121</width>
+           <width>141</width>
            <height>19</height>
           </rect>
          </property>
@@ -347,88 +347,88 @@
           <string>state not found</string>
          </property>
         </widget>
-        <widget class="QRadioButton" name="radio1">
+        <widget class="QLabel" name="display3ID">
          <property name="geometry">
           <rect>
-           <x>220</x>
-           <y>30</y>
-           <width>91</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="autoExclusive">
-          <bool>false</bool>
-         </property>
-        </widget>
-        <widget class="QRadioButton" name="radio2">
-         <property name="geometry">
-          <rect>
-           <x>220</x>
-           <y>60</y>
-           <width>81</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="autoExclusive">
-          <bool>false</bool>
-         </property>
-        </widget>
-        <widget class="QRadioButton" name="radio3">
-         <property name="geometry">
-          <rect>
-           <x>220</x>
+           <x>230</x>
            <y>90</y>
-           <width>81</width>
-           <height>22</height>
+           <width>141</width>
+           <height>19</height>
           </rect>
          </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
          <property name="text">
-          <string/>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="autoExclusive">
-          <bool>false</bool>
+          <string>value not found</string>
          </property>
         </widget>
-        <widget class="QRadioButton" name="radio4">
+        <widget class="QLabel" name="display4ID">
          <property name="geometry">
           <rect>
-           <x>220</x>
+           <x>230</x>
            <y>120</y>
-           <width>81</width>
-           <height>22</height>
+           <width>141</width>
+           <height>19</height>
           </rect>
          </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
          <property name="text">
-          <string/>
+          <string>value not found</string>
          </property>
-         <property name="checkable">
-          <bool>false</bool>
+        </widget>
+        <widget class="QLabel" name="display2ID">
+         <property name="geometry">
+          <rect>
+           <x>230</x>
+           <y>60</y>
+           <width>141</width>
+           <height>19</height>
+          </rect>
          </property>
-         <property name="autoExclusive">
-          <bool>false</bool>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text">
+          <string>value not found</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="display1ID">
+         <property name="geometry">
+          <rect>
+           <x>230</x>
+           <y>30</y>
+           <width>141</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text">
+          <string>value not found</string>
          </property>
         </widget>
        </widget>
        <widget class="QLabel" name="label_19">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>330</y>
+          <x>390</x>
+          <y>310</y>
           <width>191</width>
           <height>20</height>
          </rect>
@@ -826,7 +826,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>953</width>
+     <width>952</width>
      <height>25</height>
     </rect>
    </property>

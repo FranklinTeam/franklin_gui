@@ -68,6 +68,7 @@ public:
   float odom_X, odom_Y,odom_T;
   std::string state1, state2, state3, state4;
   bool pack1, pack2, pack3, pack4;
+  int pack1ID, pack2ID, pack3ID, pack4ID;
   bool all;
   int row;
 
